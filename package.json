@@ -1,0 +1,23 @@
+{
+  "name": "gulp-md5",
+  "version": "0.0.0",
+  "description": "set filename with md5",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Raistlin916/gulp-md5.git"
+  },
+  "keywords": [
+    "gulp",
+    "gulp-md5"
+  ],
+  "dependencies": {
+    "gulp-util": "~2.2.14"
+  },
+  "homepage": "https://github.com/Raistlin916/gulp-md5.git",
+  "author": "gaok",
+  "license": "MIT"
+}
