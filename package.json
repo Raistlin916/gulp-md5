@@ -1,7 +1,7 @@
 {
   "name": "gulp-md5",
   "version": "0.0.0",
-  "description": "set filename with md5",
+  "description": "add md5 to filename",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,8 @@
     "gulp-md5"
   ],
   "dependencies": {
-    "gulp-util": "~2.2.14"
+    "gulp-util": "~2.2.14",
+    "through2": "^0.4.1"
   },
   "homepage": "https://github.com/Raistlin916/gulp-md5.git",
   "author": "gaok",

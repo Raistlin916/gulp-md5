@@ -22,7 +22,7 @@ module.exports = function () {
         dir = path.dirname(dir);
 
         filename = filename.split('.').map(function(item, i){
-            return i == 0 ? item + '-'+ d : item;
+            return i == 0 ? item + '_'+ d : item;
         }).join('.');
 
         file.path = path.join(dir, filename);
