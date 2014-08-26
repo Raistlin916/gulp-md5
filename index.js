@@ -3,14 +3,16 @@ var path = require('path')
 , through = require('through2')
 , crypto = require('crypto');
 
-module.exports = function () {
+module.exports = function (size) {
+    size = size | 0;
+    
     return through.obj(function (file, enc, cb) {
         if (file.isStream()) {
             this.emit('error', new gutil.PluginError('gulp-debug', 'Streaming not supported'));
             return cb();
         }
 
-        var d = calcMd5(file)
+        var d = calcMd5(file, size)
         , filename = path.basename(file.path)
         , dir;
 
@@ -21,8 +23,8 @@ module.exports = function () {
         }
         dir = path.dirname(dir);
 
-        filename = filename.split('.').map(function(item, i){
-            return i == 0 ? item + '_'+ d : item;
+        filename = filename.split('.').map(function(item, i, arr){
+            return i == arr.length-2 ? item + '_'+ d : item;
         }).join('.');
 
         file.path = path.join(dir, filename);
@@ -35,8 +37,9 @@ module.exports = function () {
 };
 
 
-function calcMd5(file){
+function calcMd5(file, slice){
     var md5 = crypto.createHash('md5');
     md5.update(file.contents, 'utf8');
-    return md5.digest('hex').slice(0, 10);
+
+    return slice >0 ? md5.digest('hex').slice(0, slice) : md5.digest('hex');
 }
