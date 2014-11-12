@@ -1,11 +1,11 @@
-var path    = require('path'),
-    gutil   = require('gulp-util'),
-    through = require('through2'),
-    crypto  = require('crypto');
+var path = require('path')
+  , gutil = require('gulp-util')
+  , through = require('through2')
+  , crypto = require('crypto');
 
-module.exports = function (options) {
+module.exports = function(options) {
   var separator,
-      size;
+    size;
 
   if (typeof options === 'object') {
     separator = options.separator || '_';
@@ -15,37 +15,37 @@ module.exports = function (options) {
     separator = '_';
   }
 
-  return through.obj(function (file, enc, cb) {
-      if (file.isStream()) {
-          this.emit('error', new gutil.PluginError('gulp-debug', 'Streaming not supported'));
-          return cb();
-      }
+  return through.obj(function(file, enc, cb) {
+    if (file.isStream()) {
+      this.emit('error', new gutil.PluginError('gulp-debug', 'Streaming not supported'));
+      return cb();
+    }
 
-      var md5Hash = calcMd5(file, size),
-          filename = path.basename(file.path),
-          dir;
+    var md5Hash = calcMd5(file, size),
+      filename = path.basename(file.path),
+      dir;
 
-      if(file.path[0] == '.'){
-          dir = path.join(file.base, file.path);
-      } else {
-          dir = file.path;
-      }
-      dir = path.dirname(dir);
+    if (file.path[0] == '.') {
+      dir = path.join(file.base, file.path);
+    } else {
+      dir = file.path;
+    }
+    dir = path.dirname(dir);
 
-      filename = filename.split('.').map(function(item, i, arr){
-          return i == arr.length-2 ? item + separator + md5Hash : item;
-      }).join('.');
+    filename = filename.split('.').map(function(item, i, arr) {
+      return i == arr.length - 2 ? item + separator + md5Hash : item;
+    }).join('.');
 
-      file.path = path.join(dir, filename);
+    file.path = path.join(dir, filename);
 
-      this.push(file);
-      cb();
-  }, function (cb) {
-      cb();
+    this.push(file);
+    cb();
+  }, function(cb) {
+    cb();
   });
 };
 
-function calcMd5(file, slice){
+function calcMd5(file, slice) {
   var md5 = crypto.createHash('md5');
   md5.update(file.contents, 'utf8');
 
