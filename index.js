@@ -11,7 +11,7 @@ module.exports = function(options) {
     separator = options.separator || '_';
     size = options.size | 0;
   } else {
-    size = size | 0;
+    size = options | 0;
     separator = '_';
   }
 
