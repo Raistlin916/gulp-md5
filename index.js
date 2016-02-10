@@ -4,15 +4,16 @@ var path = require('path')
   , crypto = require('crypto');
 
 module.exports = function(options) {
-  var separator,
-    size;
+  var separator, size, printOnly;
 
   if (typeof options === 'object') {
+    printOnly = options.printOnly || false;
     separator = options.separator || '_';
     size = options.size | 0;
   } else {
     size = options | 0;
     separator = '_';
+    printOnly = false;
   }
 
   return through.obj(function(file, enc, cb) {
@@ -24,6 +25,11 @@ module.exports = function(options) {
     var md5Hash = calcMd5(file, size),
       filename = path.basename(file.path),
       dir;
+
+    if (printOnly) {
+      gutil.log(filename + ' ' + md5Hash);
+      return cb(null, file)
+    }
 
     if (file.path[0] == '.') {
       dir = path.join(file.base, file.path);
