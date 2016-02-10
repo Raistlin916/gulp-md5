@@ -1,6 +1,6 @@
 {
   "name": "gulp-md5",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "add md5 to filename",
   "main": "index.js",
   "scripts": {
