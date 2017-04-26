@@ -1,3 +1,6 @@
+[![NPM](https://nodei.co/npm/gulp-md5.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/gulp-md5/)
+[![NPM](https://nodei.co/npm-dl/gulp-md5.png?months=9&height=3)](https://nodei.co/npm/gulp-md5/)
+
 # gulp-md5
 
 > md5 plugin for [gulp](https://github.com/wearefractal/gulp).
