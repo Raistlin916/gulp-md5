@@ -35,6 +35,14 @@ Default: false
 
 Optional: you can pass printOnly to skip md5 appending to filenames and just print md5 of file to console.
 
+### md5({separator: '_'})
+
+#### separator
+Type: `String`  
+Default: '_'
+
+Optional: you can pass other separator like '-'.
+
 ### md5(size)
 
 #### size
