@@ -1,5 +1,6 @@
 var path = require('path')
-  , gutil = require('gulp-util')
+  , log = require('fancy-log')
+  , PluginError = require('plugin-error')
   , through = require('through2')
   , crypto = require('crypto');
 
@@ -18,7 +19,7 @@ module.exports = function(options) {
 
   return through.obj(function(file, enc, cb) {
     if (file.isStream()) {
-      this.emit('error', new gutil.PluginError('gulp-debug', 'Streaming not supported'));
+      this.emit('error', new PluginError('gulp-debug', 'Streaming not supported'));
       return cb();
     }
 
@@ -27,7 +28,7 @@ module.exports = function(options) {
       dir;
 
     if (printOnly) {
-      gutil.log(filename + ' ' + md5Hash);
+      log(filename + ' ' + md5Hash);
       return cb(null, file)
     }
 
